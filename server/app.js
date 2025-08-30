@@ -5,21 +5,28 @@ require("dotenv").config();
 
 const app = express();
 
+// ✅ CORS setup
 app.use(cors({
-  origin: "http://localhost:5174",  // React dev server
+  origin: "http://localhost:5174", // frontend
   credentials: true
 }));
+
+// ✅ Middleware
 app.use(express.json());
 
-// Import routes
+// ✅ Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/books", require("./routes/bookRoutes"));
 app.use("/api/books/:bookId/reviews", require("./routes/reviewRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(process.env.PORT || 5000, () =>
-    console.log(`Server running on port ${process.env.PORT || 5000}`)))
+// ✅ MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() =>
+    app.listen(process.env.PORT || 5000, () =>
+      console.log(`✅ Server running on port ${process.env.PORT || 5000}`)
+    )
+  )
   .catch(console.error);
 
 module.exports = app;
