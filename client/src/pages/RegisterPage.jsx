@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../axiosConfig";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setErr("");
     try {
-      const res = await axios.post("/api/auth/register", { username, email, password });
+      const res = await api.post("/api/auth/register", { username, email, password });
       login(res.data.user, res.data.token);
       navigate("/");
     } catch (e) {
