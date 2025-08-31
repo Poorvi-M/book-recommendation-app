@@ -1,5 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174"], // allow both common Vite ports
+  credentials: true, // required if your frontend sends cookies/authorization
+}));
+
 const mongoose = require("mongoose");
 require("dotenv").config();
 
