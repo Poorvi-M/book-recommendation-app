@@ -1,19 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"], // allow both common Vite ports
-  credentials: true, // required if your frontend sends cookies/authorization
-}));
-
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const app = express();
+const app = express(); // ✅ define app first
 
 // ✅ CORS setup
 app.use(cors({
-  origin: "http://localhost:5174", // frontend
-  credentials: true
+  origin: ["http://localhost:5173", "http://localhost:5174"], // allow both Vite ports
+  credentials: true, // allow cookies/authorization headers
 }));
 
 // ✅ Middleware
@@ -32,6 +27,6 @@ mongoose.connect(process.env.MONGO_URI)
       console.log(`✅ Server running on port ${process.env.PORT || 5000}`)
     )
   )
-  .catch(console.error);
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 module.exports = app;
