@@ -72,7 +72,7 @@ book-recommendation-app/
 └── ...
 ```
 
-## Want to deploy or customize?
+<!--## Want to deploy or customize?
 
 - You can deploy backend and frontend to services like Heroku, Vercel, Netlify, or Render.
 - Easily customize styles with Tailwind CSS and extend functionality as you wish!
